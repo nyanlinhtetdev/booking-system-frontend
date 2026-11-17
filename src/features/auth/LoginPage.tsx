@@ -43,22 +43,21 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-[calc(100vh-81px)] bg-slate-50 px-4 py-12 sm:px-6">
-      <div className="mx-auto max-w-md">
-        <div className="rounded-2xl bg-white p-8 shadow-lg ring-1 ring-slate-200">
-          <div className="mb-8 text-center">
-            <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-blue-600">
-              Welcome back
+    <main className="min-h-[calc(100vh-81px)] bg-[#eaf3f7] px-6 py-14 text-[#173148] sm:px-8 lg:px-12 lg:py-20">
+      <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-xl border border-[#c8dce5] bg-[#f7fbfc] p-7 sm:p-10">
+          <div className="mb-9 border-b border-[#c8dce5] pb-7">
+            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#55798d]">
+              Student account&nbsp; / &nbsp;welcome back
             </p>
-            <h1 className="text-3xl font-bold text-slate-900">Sign in</h1>
-            <p className="mt-2 text-slate-600">
-              Access your bookings and saved resources.
-            </p>
+            <h1 className="font-serif text-5xl tracking-[-0.04em] text-[#142d43]">
+              Sign in to continue.
+            </h1>
           </div>
 
           {error && (
             <p
-              className="mb-6 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700"
+              className="mb-6 border border-[#e7c9c4] bg-[#fff8f6] px-4 py-3 text-sm text-[#9b4d43]"
               role="alert"
             >
               {error}
@@ -67,7 +66,7 @@ export default function LoginPage() {
 
           {locationState?.message && (
             <p
-              className="mb-6 rounded-lg bg-green-50 px-4 py-3 text-sm text-green-700"
+              className="mb-6 border border-[#c7ded3] bg-[#f4fbf7] px-4 py-3 text-sm text-[#39705a]"
               role="status"
             >
               {locationState.message}
@@ -76,7 +75,7 @@ export default function LoginPage() {
 
           <form className="space-y-5" onSubmit={handleSubmit}>
             <label className="block">
-              <span className="mb-2 block text-sm font-medium text-slate-700">
+              <span className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.16em] text-[#55798d]">
                 Email
               </span>
               <input
@@ -87,12 +86,12 @@ export default function LoginPage() {
                 }
                 autoComplete="email"
                 required
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                className="w-full border border-[#c8dce5] bg-white px-4 py-3 text-[#173148] outline-none transition placeholder:text-[#7793a2] focus:border-[#285571] focus:ring-1 focus:ring-[#285571]"
               />
             </label>
 
             <label className="block">
-              <span className="mb-2 block text-sm font-medium text-slate-700">
+              <span className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.16em] text-[#55798d]">
                 Password
               </span>
               <input
@@ -103,24 +102,24 @@ export default function LoginPage() {
                 }
                 autoComplete="current-password"
                 required
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                className="w-full border border-[#c8dce5] bg-white px-4 py-3 text-[#173148] outline-none transition placeholder:text-[#7793a2] focus:border-[#285571] focus:ring-1 focus:ring-[#285571]"
               />
             </label>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full cursor-pointer bg-[#285571] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#173f59] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isSubmitting ? "Signing in..." : "Sign in"}
+              {isSubmitting ? "Logging in..." : "Log in"}
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-slate-600">
+          <p className="mt-6 text-center text-sm text-[#55798d]">
             Don&apos;t have an account?{" "}
             <Link
               to="/register"
-              className="font-semibold text-blue-600 hover:text-blue-700"
+              className="cursor-pointer font-semibold text-[#285571] hover:text-[#4d879d]"
             >
               Create one
             </Link>

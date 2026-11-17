@@ -42,24 +42,21 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="min-h-[calc(100vh-81px)] bg-slate-50 px-4 py-12 sm:px-6">
-      <div className="mx-auto max-w-2xl">
-        <div className="rounded-2xl bg-white p-8 shadow-lg ring-1 ring-slate-200">
-          <div className="mb-8 text-center">
-            <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-blue-600">
-              Get started
+    <main className="min-h-[calc(100vh-81px)] bg-[#eaf3f7] px-6 py-14 text-[#173148] sm:px-8 lg:px-12 lg:py-20">
+      <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-3xl border border-[#c8dce5] bg-[#f7fbfc] p-7 sm:p-10">
+          <div className="mb-9 border-b border-[#c8dce5] pb-7">
+            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#55798d]">
+              Student account&nbsp; / &nbsp;registration
             </p>
-            <h1 className="text-3xl font-bold text-slate-900">
-              Create your account
-            </h1>
-            <p className="mt-2 text-slate-600">
-              Join the campus resource booking system.
-            </p>
+            <h1 className="font-serif text-5xl tracking-[-0.04em] text-[#142d43]">
+              Create your account.
+            </h1>          
           </div>
 
           {error && (
             <p
-              className="mb-6 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700"
+              className="mb-6 border border-[#e7c9c4] bg-[#fff8f6] px-4 py-3 text-sm text-[#9b4d43]"
               role="alert"
             >
               {error}
@@ -68,7 +65,7 @@ export default function RegisterPage() {
 
           <form className="grid gap-5 sm:grid-cols-2" onSubmit={handleSubmit}>
             <label className="block sm:col-span-2">
-              <span className="mb-2 block text-sm font-medium text-slate-700">
+              <span className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.16em] text-[#55798d]">
                 Full name
               </span>
               <input
@@ -77,12 +74,12 @@ export default function RegisterPage() {
                 onChange={(event) => updateField("fullName", event.target.value)}
                 autoComplete="name"
                 required
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                className="w-full border border-[#c8dce5] bg-white px-4 py-3 text-[#173148] outline-none transition focus:border-[#285571] focus:ring-1 focus:ring-[#285571]"
               />
             </label>
 
             <label className="block">
-              <span className="mb-2 block text-sm font-medium text-slate-700">
+              <span className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.16em] text-[#55798d]">
                 Email
               </span>
               <input
@@ -91,12 +88,12 @@ export default function RegisterPage() {
                 onChange={(event) => updateField("email", event.target.value)}
                 autoComplete="email"
                 required
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                className="w-full border border-[#c8dce5] bg-white px-4 py-3 text-[#173148] outline-none transition focus:border-[#285571] focus:ring-1 focus:ring-[#285571]"
               />
             </label>
 
             <label className="block">
-              <span className="mb-2 block text-sm font-medium text-slate-700">
+              <span className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.16em] text-[#55798d]">
                 Contact number
               </span>
               <input
@@ -107,12 +104,12 @@ export default function RegisterPage() {
                 }
                 autoComplete="tel"
                 required
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                className="w-full border border-[#c8dce5] bg-white px-4 py-3 text-[#173148] outline-none transition focus:border-[#285571] focus:ring-1 focus:ring-[#285571]"
               />
             </label>
 
             <label className="block">
-              <span className="mb-2 block text-sm font-medium text-slate-700">
+              <span className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.16em] text-[#55798d]">
                 Student ID
               </span>
               <input
@@ -120,12 +117,12 @@ export default function RegisterPage() {
                 value={form.studentId}
                 onChange={(event) => updateField("studentId", event.target.value)}
                 required
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                className="w-full border border-[#c8dce5] bg-white px-4 py-3 text-[#173148] outline-none transition focus:border-[#285571] focus:ring-1 focus:ring-[#285571]"
               />
             </label>
 
             <label className="block">
-              <span className="mb-2 block text-sm font-medium text-slate-700">
+              <span className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.16em] text-[#55798d]">
                 Password
               </span>
               <input
@@ -135,7 +132,7 @@ export default function RegisterPage() {
                 autoComplete="new-password"
                 minLength={8}
                 required
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                className="w-full border border-[#c8dce5] bg-white px-4 py-3 text-[#173148] outline-none transition focus:border-[#285571] focus:ring-1 focus:ring-[#285571]"
               />
             </label>
 
@@ -143,20 +140,20 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+                className="w-full cursor-pointer bg-[#285571] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#173f59] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isSubmitting ? "Creating account..." : "Create account"}
               </button>
             </div>
           </form>
 
-          <p className="mt-6 text-center text-sm text-slate-600">
+          <p className="mt-6 text-center text-sm text-[#55798d]">
             Already have an account?{" "}
             <Link
               to="/login"
-              className="font-semibold text-blue-600 hover:text-blue-700"
+              className="cursor-pointer font-semibold text-[#285571] hover:text-[#4d879d]"
             >
-              Sign in
+              Log in
             </Link>
           </p>
         </div>

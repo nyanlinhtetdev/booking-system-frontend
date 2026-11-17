@@ -20,3 +20,8 @@ export interface ResourceResponse {
   resourceCategoryId: string;
   resourceCategoryName: string;
 }
+
+export interface ResourceCategoryResponse{
+  resourceCategoryId: string,
+  name: string
+}

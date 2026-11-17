@@ -1,89 +1,88 @@
-import { Link } from "react-router";
-
-const features = [
+const principles = [
   {
-    title: "Find resources",
+    number: "01",
+    title: "Discover",
     description:
-      "Browse available rooms, equipment, and other campus resources in one place.",
+      "Find the rooms, equipment, and shared spaces that make campus life work for you.",
   },
   {
-    title: "Book with confidence",
+    number: "02",
+    title: "Plan",
     description:
-      "See availability before requesting a resource and keep your schedule organized.",
+      "See the details you need before you book, from location and capacity to availability.",
   },
   {
-    title: "Manage everything",
+    number: "03",
+    title: "Make it yours",
     description:
-      "Review your bookings and keep your account details up to date from one dashboard.",
+      "Keep your reservations organized and spend more time doing the work that matters.",
   },
 ];
 
 export default function HomePage() {
   return (
-    <main className="bg-slate-50">
-      <section className="bg-slate-900 px-4 py-20 text-white sm:px-6 lg:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-3xl">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
-              Campus resource booking
+    <main className="min-h-[calc(100vh-81px)] bg-[#eaf3f7] text-[#173148]">
+      <div className="mx-auto max-w-7xl px-6 py-14 sm:px-8 lg:px-12 lg:py-20">
+        <section className="border-b border-[#c8dce5] pb-14 lg:pb-20">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-8">
+            <div>
+              <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#55798d]">
+                Student life&nbsp; / &nbsp;campus resources
+              </p>
+              <h1 className="max-w-3xl font-serif text-6xl leading-[0.92] tracking-[-0.05em] text-[#142d43] sm:text-8xl">
+                Make room
+                <br />
+                for what <em className="text-[#4d879d]">matters.</em>
+              </h1>
+            </div>
+            <p className="max-w-[210px] pb-2 font-serif text-lg leading-7 text-[#55798d]">
+              A considered way to find and reserve the spaces around you.
             </p>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-              Make every booking simple.
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-              Booking System helps students discover campus resources, check
-              availability, and manage reservations without the back-and-forth.
+          </div>
+
+          <div className="grid gap-8 border-t border-[#c8dce5] pt-7 md:grid-cols-[1fr_2fr] md:gap-16">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#55798d]">
+              Common ground
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                to="/resources"
-                className="rounded-lg bg-blue-500 px-5 py-3 font-semibold text-white transition hover:bg-blue-400"
-              >
-                Browse resources
-              </Link>
-              <Link
-                to="/register"
-                className="rounded-lg border border-slate-600 px-5 py-3 font-semibold text-slate-100 transition hover:border-slate-400 hover:bg-slate-800"
-              >
-                Create an account
-              </Link>
+            <p className="max-w-2xl font-serif text-2xl leading-9 tracking-[-0.02em] text-[#285571] sm:text-3xl">
+              Your campus is full of places to study, collaborate, create, and
+              pause. Start with a space that fits the way you work.
+            </p>
+          </div>
+        </section>
+
+        <section className="py-10 lg:py-14">
+          <div className="mb-8 flex items-end justify-between gap-4">
+            <div>
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#55798d]">
+                The simple approach
+              </p>
+              <h2 className="font-serif text-4xl tracking-[-0.04em] text-[#142d43]">
+                Your day, with space to grow.
+              </h2>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section className="px-4 py-16 sm:px-6 lg:py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl font-bold text-slate-900">
-              Everything you need to plan ahead
-            </h2>
-            <p className="mt-3 text-lg text-slate-600">
-              Spend less time searching and more time making the most of your
-              campus resources.
-            </p>
-          </div>
-
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {features.map((feature) => (
+          <div className="grid border-t border-[#c8dce5] md:grid-cols-3">
+            {principles.map((principle) => (
               <article
-                key={feature.title}
-                className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200"
+                key={principle.number}
+                className="border-b border-[#c8dce5] py-7 md:border-b-0 md:border-r md:px-7 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
               >
-                <div className="mb-5 flex size-10 items-center justify-center rounded-lg bg-blue-100 font-bold text-blue-700">
-                  ✓
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900">
-                  {feature.title}
+                <p className="mb-8 text-[11px] font-semibold tracking-[0.2em] text-[#6f95a5]">
+                  {principle.number}
+                </p>
+                <h3 className="font-serif text-3xl tracking-[-0.03em] text-[#142d43]">
+                  {principle.title}
                 </h3>
-                <p className="mt-3 leading-7 text-slate-600">
-                  {feature.description}
+                <p className="mt-3 max-w-xs text-sm leading-6 text-[#55798d]">
+                  {principle.description}
                 </p>
               </article>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
   );
 }
