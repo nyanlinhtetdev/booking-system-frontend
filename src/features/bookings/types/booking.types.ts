@@ -4,6 +4,7 @@ export interface BookingRequestDto {
   resourceId: string;
   startDatetime: string;
   endDatetime: string;
+  timezone: string;
 }
 
 export interface BookingUpdateRequestDto {

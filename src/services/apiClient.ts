@@ -46,6 +46,36 @@ api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 
 let refreshPromise: Promise<RefreshTokenResponse> | null = null;
 
+export function refreshAccessToken(): Promise<RefreshTokenResponse> {
+  if (refreshPromise) {
+    return refreshPromise;
+  }
+
+  refreshPromise = api
+    .post<RefreshTokenResponse>("/auth/refresh-token")
+    .then((response) => {
+      const data: RefreshTokenResponse = response.data;
+
+      if (!data.accessToken || !data.user) {
+        throw new Error("Refresh did not return an authenticated session.");
+      }
+
+      accessToken = data.accessToken;
+      onSessionRefreshed(data);
+      return data;
+    })
+    .catch((error) => {
+      accessToken = null;
+      onAuthenticationLost();
+      return Promise.reject(error);
+    })
+    .finally(() => {
+      refreshPromise = null;
+    });
+
+  return refreshPromise;
+}
+
 api.interceptors.response.use(
   (response) => response,
 
@@ -64,7 +94,7 @@ api.interceptors.response.use(
     const isAuthEndpoint =
       url.includes("/auth/login") ||
       url.includes("/auth/register") ||
-      url.includes("/auth/refresh") ||
+      url.includes("/auth/refresh-token") ||
       url.includes("/auth/logout");
 
     if (isAuthEndpoint || originalRequest._retry) {
@@ -74,35 +104,14 @@ api.interceptors.response.use(
     originalRequest._retry = true;
 
     try {
+      const data = await refreshAccessToken();
 
-      if (!refreshPromise) {
-        refreshPromise = api
-          .post("/auth/refresh")
-          .then((response) => {
-            const data: RefreshTokenResponse = response.data;
-
-            if (!data.accessToken || !data.user) {
-              throw new Error("Refresh did not return an authenticated session.");
-            }
-
-            onSessionRefreshed(data);
-            return data;
-          })
-          .finally(() => {
-            refreshPromise = null;
-          });
+      if (originalRequest.headers) {
+        originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
       }
-
-      await refreshPromise;
-      
-      originalRequest.headers.Authorization =
-        `Bearer ${accessToken}`;
 
       return api(originalRequest);
     } catch (refreshError) {
-      accessToken = null;
-      onAuthenticationLost();
-
       return Promise.reject(refreshError);
     }
   }

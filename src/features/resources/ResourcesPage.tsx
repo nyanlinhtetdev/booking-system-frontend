@@ -145,7 +145,7 @@ export function ResourcesPage() {
               {resources.items.map((resource) => (
                 <Link
                   key={resource.resourceId}
-                  to={`resources/${resource.resourceId}`}
+                  to={`/resources/${resource.resourceId}`}
                   className="group flex min-h-48 flex-col border border-[#c8dce5] bg-[#f7fbfc] p-[18px] transition hover:-translate-y-0.5 hover:border-[#6f9bad] hover:shadow-[0_8px_24px_rgba(40,85,113,0.08)]"
                 >
                   <span className="w-fit bg-[#e4eff3] px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-[#416d82]">

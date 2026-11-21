@@ -5,6 +5,7 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../features/auth/LoginPage";
 import RegisterPage from "../features/auth/RegisterPage";
 import { ResourcesPage } from "../features/resources/ResourcesPage";
+import { ResourceDetailsPage } from "../features/resources/ResourceDetailsPage";
 
 export const router = createBrowserRouter([
     {
@@ -19,8 +20,8 @@ export const router = createBrowserRouter([
                 element: <ResourcesPage />
             },
             {
-                path: "/resources/:id",
-                
+                path: "/resources/:resourceId",
+                element: <ResourceDetailsPage />
             },
             {
                 path: "/login",

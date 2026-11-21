@@ -25,3 +25,17 @@ export interface ResourceCategoryResponse{
   resourceCategoryId: string,
   name: string
 }
+
+export interface ResourceBookingAvailability {
+  bookingId: string;
+  startDatetime: string;
+  endDatetime: string;
+  isOwnedByCurrentUser: boolean;
+}
+
+export interface ResourceAvailabilityResponse {
+  resourceId: string;
+  weekStartDate: string;
+  weekEndDate: string;
+  bookings: ResourceBookingAvailability[];
+}

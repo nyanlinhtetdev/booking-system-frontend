@@ -29,7 +29,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setOnAuthenticationLost(clearSession);
 
     return () => {
-      setOnAuthenticationLost(() => {});
+      setOnAuthenticationLost(() => { });
     };
   }, [clearSession]);
 
@@ -37,32 +37,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setOnSessionRefreshed(updateSession);
 
     return () => {
-        setOnSessionRefreshed(() => {});
+      setOnSessionRefreshed(() => { });
     };
-    }, [updateSession]);
+  }, [updateSession]);
 
 
   useEffect(() => {
-    let cancelled = false;
+    let isMounted = true;
 
     async function initializeAuth(): Promise<void> {
       try {
-      
         const data: RefreshTokenResponse = await refreshAccessToken();
 
-        if (cancelled) return;
-
-        if (data.accessToken && data.user) {
-          updateSession(data);
-        } else {
-          clearSession();
+        if (isMounted) {
+          if (data.accessToken && data.user) {
+            updateSession(data);
+          } else {
+            clearSession();
+          }
         }
       } catch {
-        if (!cancelled) {
-          clearSession(); 
+        if (isMounted) {
+          clearSession();
         }
       } finally {
-        if (!cancelled) {
+        if (isMounted) {
           setIsLoading(false);
         }
       }
@@ -71,12 +70,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     initializeAuth();
 
     return () => {
-      cancelled = true;
+      isMounted = false;
     };
   }, [clearSession, updateSession]);
 
   const login = useCallback(async (request: LoginRequest): Promise<void> => {
-    
+
     const data: LoginResponse = await loginUser(request);
 
     updateSession(data);

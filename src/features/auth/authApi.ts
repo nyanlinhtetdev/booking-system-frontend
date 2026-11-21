@@ -1,5 +1,5 @@
-import api from "../../services/apiClient";
-import type { LoginRequest, LoginResponse, RefreshTokenResponse, RegisterRequest, User } from "./types/auth.types";
+import api, { refreshAccessToken } from "../../services/apiClient";
+import type { LoginRequest, LoginResponse, RegisterRequest, User } from "./types/auth.types";
 
 export async function registerUser(request: RegisterRequest) : Promise<User> {
   const response = await api.post("/auth/register", request);
@@ -11,10 +11,7 @@ export async function loginUser(request: LoginRequest) : Promise<LoginResponse> 
   return response.data;
 }
 
-export async function refreshAccessToken() : Promise<RefreshTokenResponse>{
-  const response = await api.post("/auth/refresh-token");
-  return response.data;
-}
+export { refreshAccessToken };
 
 export async function logoutUser() {
   return await api.post("/auth/logout");
