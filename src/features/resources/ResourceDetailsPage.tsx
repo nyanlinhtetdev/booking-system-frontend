@@ -13,8 +13,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router";
-import { useAuth } from "../auth/useAuth";
+import { Link, useParams } from "react-router";
 import { createBooking } from "../bookings/bookingApi";
 import type { BookingRequestDto } from "../bookings/types/booking.types";
 import { getResource, getResourceAvailability } from "./resourceApi";
@@ -128,8 +127,6 @@ function formatDisplaySlotTime(
 
 export function ResourceDetailsPage() {
   const { resourceId } = useParams<{ resourceId: string }>();
-  const { user, isLoading: isAuthLoading } = useAuth();
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const [displayDate, setDisplayDate] = useState(() =>
@@ -160,7 +157,7 @@ export function ResourceDetailsPage() {
   const availabilityQuery = useQuery({
     queryKey: ["resource-availability", resourceId, displayDate],
     queryFn: () => getResourceAvailability(resourceId as string, displayDate),
-    enabled: Boolean(resourceId) && !isAuthLoading,
+    enabled: Boolean(resourceId),
     staleTime: 5 * 60 * 1000,
     placeholderData: keepPreviousData,
   });
@@ -368,16 +365,6 @@ export function ResourceDetailsPage() {
       return;
     }
 
-    if (!user) {
-      navigate("/login", {
-        state: {
-          from: { pathname: `/resources/${resourceId}` },
-          message: "Please log in to book this resource.",
-        },
-      });
-      return;
-    }
-
     createBookingMutation.mutate({
       resourceId,
       startDatetime: selectedSlot.startDatetime,
@@ -528,25 +515,20 @@ export function ResourceDetailsPage() {
 
             <div
               className="relative border border-[#c8dce5] bg-[#f7fbfc] p-3 sm:p-5"
-              aria-busy={availabilityQuery.isFetching || isAuthLoading}
+              aria-busy={availabilityQuery.isFetching}
             >
-              {isAuthLoading ? (
-                <div className="flex h-96 items-center justify-center text-sm text-[#55798d]">
-                  <span className="mr-3 inline-block size-5 animate-spin rounded-full border-2 border-[#8ab3c9] border-t-[#285571]" />
-                  Loading schedule...
-                </div>
-              ) : availabilityQuery.isError ? (
+              {availabilityQuery.isError ? (
                 <div className="py-16 text-center text-sm text-[#55798d]">
                   Availability could not be loaded.
                 </div>
               ) : (
                 <>
-                  {availabilityQuery.isFetching && (
+                  {/* {availabilityQuery.isFetching && (
                     <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-center bg-white/70 py-2 text-xs font-semibold text-[#285571] backdrop-blur-[1px]">
                       <span className="mr-2 inline-block size-3.5 animate-spin rounded-full border-2 border-[#8ab3c9] border-t-[#285571]" />
                       Updating schedule...
                     </div>
-                  )}
+                  )} */}
                   <FullCalendar
                     plugins={[timeGridPlugin]}
                     initialView="timeGridWeek"

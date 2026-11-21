@@ -19,10 +19,7 @@ export const router = createBrowserRouter([
                 path: "/resources",
                 element: <ResourcesPage />
             },
-            {
-                path: "/resources/:resourceId",
-                element: <ResourceDetailsPage />
-            },
+            
             {
                 path: "/login",
                 element: <LoginPage />,
@@ -36,17 +33,16 @@ export const router = createBrowserRouter([
                 children: [
                     {
                         path: "/profile"
-                    }
-                ]
-            },
-            {
-                element: <ProtectedRoute allowedRoles={["Student"]}/>,
-                children: [
+                    },
                     {
                         path: "/bookings"
+                    },
+                    {
+                        path: "/resources/:resourceId",
+                        element: <ResourceDetailsPage />
                     }
                 ]
-            },
+            },           
             {
                 element: <ProtectedRoute allowedRoles={["Admin", "SuperAdmin"]}/>,
                 children: [
