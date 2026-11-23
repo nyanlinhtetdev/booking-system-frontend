@@ -6,6 +6,8 @@ import LoginPage from "../features/auth/LoginPage";
 import RegisterPage from "../features/auth/RegisterPage";
 import { ResourcesPage } from "../features/resources/ResourcesPage";
 import { ResourceDetailsPage } from "../features/resources/ResourceDetailsPage";
+import { MyBookings } from "../features/bookings/MyBookings";
+import { UpdateBookingPage } from "../features/bookings/UpdateBookingPage";
 
 export const router = createBrowserRouter([
     {
@@ -35,7 +37,12 @@ export const router = createBrowserRouter([
                         path: "/profile"
                     },
                     {
-                        path: "/bookings"
+                        path: "/bookings",
+                        element: <MyBookings />
+                    },
+                    {
+                        path: "/bookings/:bookingId/edit",
+                        element: <UpdateBookingPage />
                     },
                     {
                         path: "/resources/:resourceId",

@@ -12,7 +12,7 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router";
 import { createBooking } from "../bookings/bookingApi";
 import type { BookingRequestDto } from "../bookings/types/booking.types";
@@ -132,7 +132,7 @@ export function ResourceDetailsPage() {
   const [displayDate, setDisplayDate] = useState(() =>
     formatMalaysiaDate(new Date())
   );
-  
+
   const [weekStartDate, setWeekStartDate] = useState<Date>(() => {
     const now = new Date();
     const day = now.getDay();
@@ -145,6 +145,16 @@ export function ResourceDetailsPage() {
 
   const [selectedSlot, setSelectedSlot] = useState<SlotSelection | null>(null);
   const [currentTime] = useState(() => Date.now());
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        setSuccessMessage(null);
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
 
   const resourceQuery = useQuery({
     queryKey: ["resource", resourceId],
@@ -187,8 +197,17 @@ export function ResourceDetailsPage() {
     mutationFn: (request: BookingRequestDto) => createBooking(request),
     onSuccess: async () => {
       setSelectedSlot(null);
+      setSuccessMessage("Booking created successfully.");
       await queryClient.invalidateQueries({
         queryKey: ["resource-availability", resourceId],
+      });
+
+      await queryClient.invalidateQueries({
+        queryKey: ["update-resource-availability", resourceId],
+      });
+
+      await queryClient.invalidateQueries({
+        queryKey: ["my-bookings"],
       });
     },
   });
@@ -504,13 +523,34 @@ export function ResourceDetailsPage() {
               </p>
             )}
 
-            {createBookingMutation.isSuccess && (
-              <p
+            {/* Success pop-up notification */}
+            {successMessage && (
+              <div
                 role="status"
-                className="mb-4 border border-[#b7cbd3] bg-[#f7fbfc] px-4 py-3 text-sm text-[#285571]"
+                className="fixed top-6 right-6 z-50 flex items-center gap-3 border border-[#8ab3c9] bg-[#142d43] px-5 py-3.5 text-sm font-medium text-white shadow-xl transition-all"
               >
-                Booking created successfully.
-              </p>
+                <svg
+                  className="size-5 shrink-0 text-[#7ec29d]"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span>{successMessage}</span>
+                <button
+                  type="button"
+                  onClick={() => setSuccessMessage(null)}
+                  className="ml-3 cursor-pointer text-white/70 hover:text-white"
+                  aria-label="Dismiss"
+                >
+                  ✕
+                </button>
+              </div>
             )}
 
             <div

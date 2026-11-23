@@ -10,12 +10,15 @@ export interface BookingRequestDto {
 export interface BookingUpdateRequestDto {
   startDatetime: string;
   endDatetime: string;
+  timezone: string;
 }
 
 export interface BookingResponseDto {
   bookingId: string;
   userId: string;
   resourceId: string;
+  resourceName?: string;
+  resourceLocation?: string;
   status: BookingStatus;
   createdDatetime: string;
   modifiedDatetime: string | null;
