@@ -151,7 +151,7 @@ export function ResourcesPage() {
                   <span className="w-fit bg-[#e4eff3] px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-[#416d82]">
                     {resource.resourceCategoryName}
                   </span>
-                  <h3 className="mt-5 font-serif text-2xl leading-tight tracking-[-0.03em] text-[#142d43] [font-variant-numeric:lining-nums] group-hover:text-[#285571]">
+                  <h3 className="mt-5 font-serif text-2xl leading-tight tracking-[-0.03em] text-[#142d43] group-hover:text-[#285571]">
                     {resource.name}
                   </h3>
                   <div className="mt-auto flex items-end justify-between gap-4 border-t border-[#e1ebef] pt-3 text-xs text-[#55798d]">
