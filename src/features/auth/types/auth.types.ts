@@ -41,4 +41,5 @@ export interface AuthContextValue {
   login: (request: LoginRequest) => Promise<void>;
   register: (request: RegisterRequest) => Promise<User>;
   logout: () => Promise<void>;
+  updateUser: (updatedUser: Partial<User>) => void;
 }

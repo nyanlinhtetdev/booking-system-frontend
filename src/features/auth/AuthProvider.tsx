@@ -94,6 +94,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [clearSession]);
 
+  const updateUser = useCallback((updated: Partial<User>): void => {
+    setUser((prev) => (prev ? { ...prev, ...updated } : prev));
+  }, []);
+
   const value: AuthContextValue = {
     user,
     accessToken: accessTokenState,
@@ -101,6 +105,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     login,
     register,
     logout,
+    updateUser,
   };
 
   return (

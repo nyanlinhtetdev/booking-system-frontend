@@ -8,6 +8,7 @@ import { ResourcesPage } from "../features/resources/ResourcesPage";
 import { ResourceDetailsPage } from "../features/resources/ResourceDetailsPage";
 import { MyBookings } from "../features/bookings/MyBookings";
 import { UpdateBookingPage } from "../features/bookings/UpdateBookingPage";
+import { ProfilePage } from "../features/profile/ProfilePage";
 
 export const router = createBrowserRouter([
     {
@@ -34,7 +35,8 @@ export const router = createBrowserRouter([
                 element: <ProtectedRoute allowedRoles={["Student", "Admin", "SuperAdmin"]}/>,
                 children: [
                     {
-                        path: "/profile"
+                        path: "/profile",
+                        element: <ProfilePage />
                     },
                     {
                         path: "/bookings",
